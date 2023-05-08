@@ -1,0 +1,124 @@
+> library(UpSetR)
+> library(DOSE)
+DOSE v3.24.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+
+If you use DOSE in published research, please cite:
+Guangchuang Yu, Li-Gen Wang, Guang-Rong Yan, Qing-Yu He. DOSE: an R/Bioconductor package for Disease Ontology Semantic and Enrichment analysis. Bioinformatics 2015, 31(4):608-609
+
+> library(Cairo)
+> ```{r, message = FALSE}
+Error: attempt to use zero-length variable name
+> library(readxl)
+> library(cellranger)
+> hour0_minus <- read_tsv("0hr, -IFN Results.txt") %>%
++ filter(SigCount == "Yes" | SigQuant == "Yes")
+Rows: 1249 Columns: 11                                                                                                              
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): Gene Symbol, Uniprot ID, SigQuant, SigCount, In Virion
+dbl (6): logRatio.Replicate1, logRatio.Replicate2, logRatio.Replicate3, logRatio.Average, pvalue, pvalue.adjust
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> hour1_minus <- read_tsv("1hr, -IFN Results.txt") %>%
++ filter(SigCount == "Yes" | SigQuant == "Yes")
+Rows: 1174 Columns: 11                                                                                                              
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): Gene Symbol, Uniprot ID, SigQuant, SigCount, In Virion
+dbl (6): logRatio.Replicate1, logRatio.Replicate2, logRatio.Replicate3, logRatio.Average, pvalue, pvalue.adjust
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> View(hour0_minus)
+> View(hour1_minus)
+> setwd("C:/Users/박민지/Documents")
+> hour0_minus <- read_tsv("0hr, -IFN Results.txt") %>%
++ filter(SigCount == "Yes" | SigQuant == "Yes")
+New names:                                                                                                                          
+• `` -> `...3`
+Rows: 1249 Columns: 12
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): Gene Symbol, UNIPROT, pvalue.adjust, SigQuant, SigCount
+dbl (6): ...3, logRatio.Replicate1, logRatio.Replicate2, logRatio.Replicate3, logRatio.Average, pvalue
+lgl (1): In Virion
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+> View(hour0_minus)
+> hour1_minus <- read_tsv("1hr, -IFN Results.txt") %>%
++ filter(SigCount == "Yes" | SigQuant == "Yes")
+New names:                                                                                                                          
+• `` -> `...3`
+Rows: 1174 Columns: 12
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): Gene Symbol, UNIPROT, pvalue.adjust, SigQuant, SigCount
+dbl (6): ...3, logRatio.Replicate1, logRatio.Replicate2, logRatio.Replicate3, logRatio.Average, pvalue
+lgl (1): In Virion
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+> all_chikv_list <- list(
++     hour0_minus = hour0_minus$'Gene Symbol',
++     hour1_minus = hour1_minus$'Gene symbol')
+Warning message:
+Unknown or uninitialised column: `Gene symbol`. 
+> all_chikv_list <- list(
++     +     hour0_minus = hour0_minus$'Gene Symbol',
+Error: unexpected '=' in:
+"all_chikv_list <- list(
+    +     hour0_minus ="
+> all_chikv_list <- list(hour0_minus = hour0_minus$'Gene Symbol'
++  hour1_minus = hour1_minus$'Gene Symbol')
+Error: unexpected symbol in:
+"all_chikv_list <- list(hour0_minus = hour0_minus$'Gene Symbol'
+ hour1_minus"
+> all_chikv_list <- list()
+> all_chikv_list <- list(hour0_minus$'Gene Symbol',)
+Error in list(hour0_minus$"Gene Symbol", ) : argument 2 is empty
+> all_chikv_list <- list(hour0_minus$'Gene Symbol',
++ View(hour1_minus)
++ hour1_minus = hour1_minus$'Gene Symbol')
+Error: unexpected symbol in:
+"View(hour1_minus)
+hour1_minus"
+> all_chikv_list <- list(hour0_minus = hour0_minus$'Gene Symbol',
++ hour1_minus = hour1_minus$'Gene Symbol')
+> View(all_chikv_list)
+> ```{r, fig.width = 10}
+Error: attempt to use zero-length variable name
+> 
+> chikv_MF <- compareCluster(all_chikv_list,
++ fun = "enrichGO",
++ fun = "enrichGO",
++ OrgDb = org.Hs.eg.db,
++ keyType       = 'UNIPROT',
++ ont           = "MF",
++ pAdjustMethod = "BH",
++ pvalueCutoff  = 0.01,
++ qvalueCutoff  = 0.05,
++ readable = TRUE)
+Error in compareCluster(all_chikv_list, fun = "enrichGO", fun = "enrichGO",  : 
+  formal argument "fun" matched by multiple actual arguments
+> chikv_MF <- compareCluster(all_chikv_list,
++ fun = "enrichGO",
++ OrgDb = org.Hs.eg.db,
++  keyType       = 'UNIPROT',
++ ont           = "MF",
++ pAdjustMethod = "BH",
++ pvalueCutoff  = 0.01,
++ qvalueCutoff  = 0.05,
++ readable = TRUE)
+Warning message:
+In compareCluster(all_chikv_list, fun = "enrichGO", OrgDb = org.Hs.eg.db,  :
+  No enrichment found in any of gene cluster, please check your input...
